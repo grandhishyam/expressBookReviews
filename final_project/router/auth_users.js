@@ -49,7 +49,7 @@ regd_users.post("/login", (req,res) => {
       accessToken,username
     }
 
-    res.send(accessToken);
+    // res.send(accessToken);
     return res.status(200).send("user successfully logged in");
   }
   else{
@@ -80,9 +80,15 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
 regd_users.delete("/auth/review/:isbn", (req, res) => {
     let ISBN = req.params.isbn;
     const user = req.session.username;
-    if(books[ISBN].reviews){}
+
+    if(books[ISBN].reviews[user]){
     books[ISBN].reviews = {}
-    return res.status(200).json({messsage:"Review has been deleted"})
+    return res.status(200).send("Review for the ISBN "+ (ISBN) +" by the user deleted"))
+    }
+
+    else{
+        return res.status(404).json({ message: 'Review not found' });
+    }
 });
 
 
