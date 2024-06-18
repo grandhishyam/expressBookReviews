@@ -118,6 +118,7 @@ public_users.get('/author/:author', async function(req, res) {
         });
     };
 
+    
     try {
         const author = req.params.author;
         const results = await fetchBooksByAuthor(author);
